@@ -1,0 +1,208 @@
+/*
+* ----------------------------------------------------------------------------------------
+* Author        : AnNTT15
+* Template Name : Common
+* Created Day   : 25/12/2022
+* Version       : 1.0
+* ----------------------------------------------------------------------------------------
+*/
+
+/*
+* Table of content
+* ----------------------------------------------------------------------------------------
+*
+* 1. Reset CSS
+* 2. Common CSS
+* 3. Responsive for common CSS
+*
+* ----------------------------------------------------------------------------------------
+*/
+
+/* #region 1. Reset CSS */
+/*
+* 1. Reset CSS
+* ----------------------------------------------------------------------------------------
+*
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  width: 100%;
+  vertical-align: middle;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-size: 14px;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* #endregion */
+
+/* #region 2. Common CSS */
+/*
+* 2. Common CSS
+* ----------------------------------------------------------------------------------------
+*
+*/
+
+.d-flex {
+  display: flex;
+}
+
+.d-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-start {
+  justify-content: flex-start;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.align-items {
+  align-items: center;
+}
+
+.align-items-start {
+  align-items: flex-start;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.row > * {
+  max-width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: -15px;
+  margin-bottom: -15px;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.column > * {
+  width: 100%;
+  max-width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.text-align {
+  text-align: center;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+/* #endregion */
+
+/* #region 3. Responsive for common CSS */
+/*
+* 3. Responsive for common CSS
+* ----------------------------------------------------------------------------------------
+*
+*/
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+
+  .col-md-4 {
+    width: 33.3333333333%;
+  }
+
+  .col-md-3 {
+    width: 25%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+}
+
+/* #endregion */

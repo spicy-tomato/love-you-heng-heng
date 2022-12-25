@@ -1,58 +1,64 @@
 const express = require("express");
 const { google } = require("googleapis");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient } = require("mongodb");
+require("dotenv").config();
 
 async function main() {
   const app = express();
   const port = 3000;
-  var username = encodeURIComponent("snowflower1408");
-  var password = encodeURIComponent("Uncrush0nu?..");
-  const uri = `mongodb+srv://${username}:${password}@cluster0.03tdjzr.mongodb.net/lyhh?retryWrites=true&w=majority`;
+  const username = encodeURIComponent(process.env.MONGODB_USERNAME);
+  const password = encodeURIComponent(process.env.MONGODB_PASSWORD);
+  const cluster = encodeURIComponent(process.env.MONGODB_CLUSTER);
+  const database = encodeURIComponent(process.env.MONGODB_DATABASE);
+
+  const uri = `mongodb+srv://${username}:${password}@${cluster}/${database}?retryWrites=true&w=majority`;
   const client = new MongoClient(uri);
 
   try {
     client.connect();
-    await listDatabases(client);
   } catch (e) {
-  } finally {
-    // Close the connection to the MongoDB cluster
-    await client.close();
+    console.log(e);
   }
 
-  app.get("/", (req, res) => {
-    res.send("Hello World!");
-  });
+  app.get("/login", login);
+  app.get("/me", me);
+  app.get("/users", (req, res) => verifyUser(req, res, client));
 
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
   });
-
-  app.get("/login", (req, res) => {
-    const oauth2Client = new google.auth.OAuth2(
-      "1042739600757-qghfrl7kb92c5mkol5ti5b5h5q96un9j.apps.googleusercontent.com",
-      'client_secret":"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',
-      "http://127.0.0.1:8080/client/"
-    );
-
-    const scopes = ["profile"];
-    const url = oauth2Client.generateAuthUrl({
-      scope: scopes,
-    });
-    res.send(url);
-  });
-
-  app.get("/users", async (req, res) => {
-    const users = await client.db("lyhh").collections();
-    console.log(users);
-    res.send(users);
-  });
 }
+
+process.on("SIGINT", function () {
+  mongoose.connection.close(function () {
+    console.log("Mongoose disconnected on app termination");
+    process.exit(0);
+  });
+});
 
 main().catch(console.error);
 
-async function listDatabases(client) {
-  databasesList = await client.db().admin().listDatabases();
+function login(req, res) {
+  const clientId = process.env.GOOGLE_CLIENT_ID;
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+  const redirectUri = process.env.REDERIECT_URI;
 
-  console.log("Databases:");
-  databasesList.databases.forEach(db => console.log(` - ${db.name}`));
-};
+  const oauth2Client = new google.auth.OAuth2(
+    clientId,
+    clientSecret,
+    redirectUri
+  );
+
+  const scope = ["profile"];
+  const url = oauth2Client.generateAuthUrl({ scope });
+  res.send(url);
+}
+
+function me(req, res) {}
+
+async function verifyUser(email) {
+  const database = process.env.MONGODB_DATABASE;
+  const cursor = await client.db(database).collection("users").find({});
+  const results = await cursor.toArray();
+  return results.map((r) => r.email).includes(email);
+}
