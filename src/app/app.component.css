@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:100");
 
-:root {
+::ng-deep :root {
   --background: #262e6f;
   --red: #ec2d73;
   --orange: #eb5324;
@@ -10,16 +10,14 @@
   --purple: #76469a;
 }
 
-body {
+.wrapper {
   background: var(--background);
 }
 
 p {
-  margin-top: 90px;
   font-family: "Lato", sans-serif;
   font-weight: 100;
   letter-spacing: 2px;
-  color: white;
 }
 
 .heart {
@@ -173,30 +171,4 @@ p {
     height: 30px;
     top: -15px;
   }
-}
-
-.login {
-  opacity: 0;
-  transition: all 1s ease-in-out;
-  top: 20px;
-}
-.login.display {
-  opacity: 100;
-}
-
-button {
-  padding: 8px 12px;
-  color: #FFC6D3;
-  background: transparent;
-  border-radius: 4px;
-  transition: all 0.5s;
-}
-button:hover {
-  color: white;
-  background: #e98ead;
-}
-button svg {
-  width: 20px;
-  height: 20px;
-  margin-left: 4px;
 }

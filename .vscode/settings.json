@@ -1,8 +1,5 @@
 {
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
   "cSpell.words": [
-    "heng"
-  ],
+    "Heng"
+  ]
 }
